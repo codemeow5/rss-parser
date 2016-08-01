@@ -124,6 +124,11 @@ var parseRSS2 = function(xmlObj, callback) {
       if (entry.guid._) entry.guid = entry.guid._;
     }
     if (item.category) entry.categories = item.category;
+    if (item['media:thumbnail']) {
+      entry.thumbnail = item['media:thumbnail'][0].$.url;
+      entry.thumbnailWidth = item['media:thumbnail'][0].$.width;
+      entry.thumbnailHeight = item['media:thumbnail'][0].$.height;
+    }
     json.feed.entries.push(entry);
   })
   if (xmlObj.rss.$['xmlns:itunes']) {
